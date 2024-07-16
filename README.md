@@ -10,7 +10,7 @@ Python script to analyze an Android APK file to help determine if the Android ga
     * shutil
     * subprocess
     * sys
-    * ZilFile
+    * ZipFile
     * APK
 * VitaSDK
 
