@@ -78,7 +78,8 @@ def checkApk(check_apk_path):
 		apk_path = os.path.join(SOURCE_FOLDER, apk_file)
 		apk_file_name, apk_file_extension = os.path.splitext(os.path.basename(apk_path))
 
-		print(f"Processing APK: {lg}{apk_path}{x}")
+		print(f"{gr}#########################################{x}")
+		print(f"APK: {lg}{apk_path}{x}")
 
 		'''
 		if apk_file in apks_in_spreadsheet:
@@ -104,6 +105,11 @@ def checkApk(check_apk_path):
 				game_information["game_url"] = "https://play.google.com/store/apps/details?id=" + apk_info.package
 				game_information["game_version_name"] = apk_info.version_name
 				game_information["game_version_code"] = apk_info.version_code
+
+				print(f"Name: {lg}{game_information["game_name"]}{x}")
+				print(f"Package: {lg}{game_information["game_package"]}{x}")
+				print(f"Version: {lg}{game_information["game_version_name"]}{x}")
+				print(f"Code: {lg}{game_information["game_version_code"]}{x}")
 			else:
 				game_information["game_name"] = " "
 				game_information["game_package"] = " "
@@ -117,6 +123,8 @@ def checkApk(check_apk_path):
 			with ZipFile(apk_path) as zip_archive:
 				za_lib_list = []
 				extracted_so_file = None
+
+				print("Checking libs")
 
 				for file_name in zip_archive.namelist():
 					if file_name[:3] == 'lib':
@@ -273,13 +281,6 @@ def checkApk(check_apk_path):
 					game_information["open_sles_found"] = " "
 					game_information["port_verdict_reason"] = "\r\n".join(port_verdict_reason_list)
 					data_frame_list.append(game_information)
-
-				# this is where I should update the info
-				'''
-				for row in data_frame_list:
-					update_spreadsheet( list(row.values()) )
-					print(f"... Wrote to spreadsheet")
-				'''
 
 		except Exception as error:
 			print(f"{error}")
