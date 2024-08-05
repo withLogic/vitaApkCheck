@@ -45,21 +45,6 @@ def convert_size(size_bytes):
 
 	return "%s %s" % (s, size_name[i])
 
-def update_spreadsheet(list_of_data):
-	attempt_successful = 0
-	attempt = 1
-
-	while attempt_successful == 0:
-		try:
-			worksheet.append_row( list_of_data )
-			attempt_successful = 1
-		except gspread.exceptions.APIError as e:
-			if e.response.status_code == 429:  # Rate limit error
-				attempt += 1
-				sleep_time = (2 ** attempt) + (random.randint(0, 1000) / 1000)
-				print(f"Sleeping for {sleep_time} seconds before retrying...")
-				time.sleep(sleep_time)
-
 def checkApk(check_apk_path):
 	apk_files = []
 
@@ -106,10 +91,17 @@ def checkApk(check_apk_path):
 				game_information["game_version_name"] = apk_info.version_name
 				game_information["game_version_code"] = apk_info.version_code
 
-				print(f"Name: {lg}{game_information["game_name"]}{x}")
-				print(f"Package: {lg}{game_information["game_package"]}{x}")
-				print(f"Version: {lg}{game_information["game_version_name"]}{x}")
-				print(f"Code: {lg}{game_information["game_version_code"]}{x}")
+				gname = game_information["game_name"]
+				print(f"Name: {lg}{name}{x}")
+
+				gpackage = game_information["game_package"]
+				print(f"Package: {lg}{gpackage}{x}")
+
+				gversionname = game_information["game_version_name"]
+				print(f"Version: {lg}{gversionname}{x}")
+
+				gversioncode = game_information["game_version_code"]
+				print(f"Code: {lg}{gversioncode}{x}")
 			else:
 				game_information["game_name"] = " "
 				game_information["game_package"] = " "
