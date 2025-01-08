@@ -92,7 +92,7 @@ def checkApk(check_apk_path):
 				game_information["game_version_code"] = apk_info.version_code
 
 				gname = game_information["game_name"]
-				print(f"Name: {lg}{name}{x}")
+				print(f"Name: {lg}{gname}{x}")
 
 				gpackage = game_information["game_package"]
 				print(f"Package: {lg}{gpackage}{x}")
